@@ -6,7 +6,7 @@ This repository is being prepared as the public source for the HEADFIRST Skills 
 
 Every public Skill must include:
 
-- a clear origin label: original, reference rebuild or upstream adaptation;
+- a clear origin label: HEADFIRST Original, Reference-based Rebuild or Open-source Adaptation;
 - a license and all required upstream notices;
 - a public-data review;
 - an example or eval that demonstrates the claimed workflow;

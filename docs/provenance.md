@@ -2,15 +2,15 @@
 
 Every released Skill uses one of these labels.
 
-## Original
+## HEADFIRST Original
 
 The workflow was created for HEADFIRST from locally documented practice, with no third-party Skill used as source material.
 
-## Reference rebuild
+## Reference-based Rebuild
 
 The workflow was restructured after studying public tools or methods. The release must name meaningful references and complete a clean-room comparison before publication.
 
-## Upstream adaptation
+## Open-source Adaptation
 
 The workflow modifies an existing Skill. The upstream author, repository, license and material local changes must remain visible.
 

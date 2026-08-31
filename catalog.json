@@ -3,19 +3,19 @@
   "skills": [
     {
       "name": "interactive-html-demo",
-      "provenance": "original",
+      "provenance": "headfirst-original",
       "state": "public-preparation",
       "releaseBlocker": "Sanitize examples and select a license"
     },
     {
       "name": "web-design-qa",
-      "provenance": "reference-rebuild",
+      "provenance": "reference-based-rebuild",
       "state": "review-required",
       "releaseBlocker": "Complete clean-room comparison and attribution"
     },
     {
       "name": "diagnosing-bugs",
-      "provenance": "upstream-adaptation",
+      "provenance": "open-source-adaptation",
       "upstream": "https://github.com/mattpocock/skills",
       "license": "MIT",
       "state": "review-required",
