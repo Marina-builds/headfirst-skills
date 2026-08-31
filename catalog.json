@@ -4,8 +4,15 @@
     {
       "name": "interactive-html-demo",
       "provenance": "headfirst-original",
-      "state": "public-preparation",
-      "releaseBlocker": "Sanitize examples and select a license"
+      "version": "1.0.0",
+      "license": "MIT",
+      "state": "release-ready-local",
+      "validation": {
+        "staticPasses": 15,
+        "staticWarnings": 0,
+        "staticErrors": 0,
+        "responsiveViewports": ["1440x900", "768x1024", "390x844"]
+      }
     },
     {
       "name": "web-design-qa",

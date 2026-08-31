@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Single-file interactive HTML demo starter">
+  <link rel="icon" href="data:,">
+  <title>Interactive Demo Starter</title>
+  <style>
+    :root {
+      --bg: #0d1513;
+      --surface: #16211e;
+      --text: #f5f0e4;
+      --muted: #aab5af;
+      --accent: #e45b47;
+      --line: rgba(245,240,228,.16);
+      --radius: 16px;
+      --ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body { overflow: hidden; color: var(--text); background: var(--bg); font-family: var(--ui); }
+    button { color: inherit; font: inherit; }
+    button:focus-visible { outline: 3px solid #f1ca73; outline-offset: 3px; }
+    .deck { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(2%);
+      transition: opacity .3s ease, transform .4s ease, visibility 0s linear .4s;
+    }
+    .slide.active { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+    .inner { width: min(1180px, 100%); padding: 80px 54px 96px; }
+    h1, h2, p { margin-top: 0; overflow-wrap: anywhere; }
+    h1 { max-width: 12ch; margin-bottom: 22px; font-size: clamp(48px, 7vw, 96px); line-height: .96; letter-spacing: -.05em; }
+    h2 { max-width: 18ch; font-size: clamp(38px, 5vw, 70px); line-height: 1; }
+    p { max-width: 62ch; color: var(--muted); font-size: clamp(16px, 1.7vw, 22px); line-height: 1.65; }
+    .eyebrow { margin-bottom: 16px; color: #f1ca73; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .prototype-badge { display: inline-block; margin-top: 18px; border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; color: var(--muted); font-size: 11px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; background: var(--surface); }
+    .panel h3 { margin: 0 0 8px; }
+    .panel p { margin: 0; font-size: 14px; }
+    .demo-layout { display: grid; grid-template-columns: 1fr minmax(320px, .7fr); gap: 46px; align-items: center; }
+    .demo-card { min-height: 390px; border: 1px solid var(--line); border-radius: 28px; padding: 28px; background: #f5f0e4; color: #14201c; }
+    .demo-card small { color: #8a3b31; font-weight: 800; }
+    .demo-card h3 { margin: 54px 0 12px; font-size: 30px; }
+    .demo-card p { color: #53615a; font-size: 15px; }
+    .primary { border: 0; border-radius: 999px; padding: 12px 18px; background: var(--accent); color: #fff; cursor: pointer; font-weight: 800; }
+    .demo-card .primary { width: 100%; margin-top: 48px; }
+    .controls { position: fixed; z-index: 20; left: 50%; bottom: 18px; display: flex; align-items: center; gap: 8px; transform: translateX(-50%); }
+    .controls button, .utility button { width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: rgba(13,21,19,.85); cursor: pointer; }
+    .counter { min-width: 72px; text-align: center; color: var(--muted); font-size: 12px; }
+    .utility { position: fixed; z-index: 20; right: 18px; bottom: 18px; display: flex; gap: 8px; }
+    .progress { position: fixed; z-index: 25; inset: auto 0 0; height: 3px; background: rgba(255,255,255,.08); }
+    .progress > div { height: 100%; width: 0; background: var(--accent); transition: width .25s ease; }
+    .modal, .notes {
+      position: fixed;
+      z-index: 40;
+      display: none;
+      border: 1px solid var(--line);
+      background: #101a17;
+      box-shadow: 0 24px 80px rgba(0,0,0,.4);
+    }
+    .modal.open, .notes.open { display: block; }
+    .modal { inset: 7%; overflow: auto; border-radius: var(--radius); padding: 30px; }
+    .notes { right: 18px; bottom: 72px; width: min(440px, calc(100vw - 36px)); border-radius: var(--radius); padding: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; }
+    .modal-head button { border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 26px; }
+    .directory { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+    .directory button { border: 1px solid var(--line); border-radius: 12px; padding: 16px; color: var(--text); background: var(--surface); cursor: pointer; text-align: left; }
+    .directory button.current { border-color: var(--accent); }
+    .speaker-note { display: none; }
+    @media (max-width: 760px) {
+      body { overflow-x: hidden; }
+      .slide { overflow-y: auto; place-items: start center; }
+      .inner { width: 100%; max-width: 100%; padding: 74px 20px 100px; }
+      .grid, .demo-layout { grid-template-columns: 1fr; }
+      .demo-layout > *, .demo-card { min-width: 0; max-width: 100%; }
+      .demo-card { width: 100%; min-height: 350px; }
+      .directory { grid-template-columns: 1fr; }
+      .controls { left: 16px; transform: none; }
+      .utility { right: 16px; }
+      #notesButton, #fullscreenButton { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide active" id="cover" data-title="Cover">
+      <div class="inner">
+        <div class="eyebrow">Interactive Demo</div>
+        <h1>Replace with one clear promise.</h1>
+        <p>Explain what the audience will understand by clicking through this experience.</p>
+        <button class="primary" type="button" data-goto="problem">Start demo</button>
+        <div class="prototype-badge">Interactive prototype · Simulated demo</div>
+        <aside class="speaker-note"><strong>Opening:</strong> Name the audience, problem, and demo goal in one sentence.</aside>
+      </div>
+    </section>
+
+    <section class="slide" id="problem" data-title="Problem">
+      <div class="inner">
+        <div class="eyebrow">Problem</div>
+        <h2>Show the tension before the mechanism.</h2>
+        <div class="grid">
+          <article class="panel"><h3>Current state</h3><p>Use real evidence or clearly labeled assumptions.</p></article>
+          <article class="panel"><h3>Desired state</h3><p>Describe the observable change the demo will prove.</p></article>
+        </div>
+        <aside class="speaker-note"><strong>Talk track:</strong> Explain the problem and consequence instead of reading the cards.</aside>
+      </div>
+    </section>
+
+    <section class="slide" id="demo" data-title="Interactive demo">
+      <div class="inner demo-layout">
+        <div>
+          <div class="eyebrow">Live Demo</div>
+          <h2>Make each click change something visible.</h2>
+          <p>Keep the critical path short. Use the fallback controls in the directory if the presenter needs to jump.</p>
+          <div class="prototype-badge">This flow is simulated and does not call a live backend.</div>
+        </div>
+        <div class="demo-card" id="demoCard" aria-live="polite"></div>
+        <aside class="speaker-note"><strong>Action:</strong> Use the card on the right and complete consequence, feedback, retry, and success.</aside>
+      </div>
+    </section>
+
+    <section class="slide" id="decision" data-title="Decision">
+      <div class="inner">
+        <div class="eyebrow">Decision</div>
+        <h2>End with the decision this demo enables.</h2>
+        <p>State the next action, owner, evidence needed, or validation threshold.</p>
+        <button class="primary" type="button" data-reset-demo>Restart demo</button>
+        <aside class="speaker-note"><strong>Close:</strong> End with a concrete next action, not a vague invitation to try.</aside>
+      </div>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Page navigation">
+    <button id="prev" type="button" aria-label="Previous page">←</button>
+    <span class="counter" id="counter">01 / 04</span>
+    <button id="next" type="button" aria-label="Next page">→</button>
+  </nav>
+  <div class="utility">
+    <button id="directoryButton" type="button" aria-label="Open directory">☷</button>
+    <button id="notesButton" type="button" aria-label="Open speaker notes">N</button>
+    <button id="fullscreenButton" type="button" aria-label="Enter fullscreen">⛶</button>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <section class="modal" id="directoryModal" role="dialog" aria-modal="true" aria-label="Demo directory">
+    <div class="modal-head"><h2>Demo directory</h2><button type="button" data-close="directoryModal" aria-label="Close">×</button></div>
+    <div class="directory" id="directory"></div>
+  </section>
+  <aside class="notes" id="notesPanel"></aside>
+
+  <script>
+    (() => {
+      'use strict';
+      const slides = [...document.querySelectorAll('.slide')];
+      const counter = document.getElementById('counter');
+      const progressBar = document.getElementById('progressBar');
+      const notesPanel = document.getElementById('notesPanel');
+      const directoryModal = document.getElementById('directoryModal');
+      let activeIndex = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      const demoStates = [
+        { label: 'READY', title: 'Start from a clear task', body: 'The audience knows what action to take.', button: 'Run action' },
+        { label: 'CONSEQUENCE', title: 'Show a visible consequence', body: 'The page changes because of the action.', button: 'Get feedback' },
+        { label: 'ONE FIX', title: 'Give one useful correction', body: 'Do not overwhelm the user with five fixes.', button: 'Retry' },
+        { label: 'SUCCESS', title: 'Make success observable', body: 'Connect the result to the next decision.', button: 'Restart demo' }
+      ];
+      let demoStep = 0;
+      const demoCard = document.getElementById('demoCard');
+
+      function renderDemo() {
+        const state = demoStates[demoStep];
+        demoCard.innerHTML = `<small>${state.label} · ${demoStep + 1} / ${demoStates.length}</small><h3>${state.title}</h3><p>${state.body}</p><button class="primary" type="button">${state.button}</button>`;
+        demoCard.querySelector('button').addEventListener('click', () => {
+          demoStep = demoStep >= demoStates.length - 1 ? 0 : demoStep + 1;
+          renderDemo();
+        });
+      }
+
+      function showSlide(index, updateHash = true) {
+        if (index < 0 || index >= slides.length || index === activeIndex) return;
+        slides[activeIndex].classList.remove('active');
+        activeIndex = index;
+        slides[activeIndex].classList.add('active');
+        updateUI();
+        if (updateHash) history.replaceState(null, '', `#${slides[activeIndex].id}`);
+      }
+
+      function updateUI() {
+        counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        progressBar.style.width = `${((activeIndex + 1) / slides.length) * 100}%`;
+        const note = slides[activeIndex].querySelector('.speaker-note');
+        notesPanel.innerHTML = note ? note.innerHTML : 'No notes for this page.';
+        document.querySelectorAll('[data-slide-index]').forEach(button => button.classList.toggle('current', Number(button.dataset.slideIndex) === activeIndex));
+      }
+
+      document.getElementById('prev').addEventListener('click', () => showSlide(activeIndex - 1));
+      document.getElementById('next').addEventListener('click', () => showSlide(activeIndex + 1));
+      document.querySelectorAll('[data-goto]').forEach(button => button.addEventListener('click', () => showSlide(slides.findIndex(slide => slide.id === button.dataset.goto))));
+      document.querySelectorAll('[data-reset-demo]').forEach(button => button.addEventListener('click', () => { demoStep = 0; renderDemo(); showSlide(2); }));
+
+      const directory = document.getElementById('directory');
+      slides.forEach((slide, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.slideIndex = index;
+        button.textContent = `${String(index + 1).padStart(2, '0')} · ${slide.dataset.title}`;
+        button.addEventListener('click', () => { showSlide(index); directoryModal.classList.remove('open'); });
+        directory.appendChild(button);
+      });
+
+      document.getElementById('directoryButton').addEventListener('click', () => directoryModal.classList.toggle('open'));
+      document.getElementById('notesButton').addEventListener('click', () => notesPanel.classList.toggle('open'));
+      document.getElementById('fullscreenButton').addEventListener('click', async () => {
+        try { document.fullscreenElement ? await document.exitFullscreen() : await document.documentElement.requestFullscreen(); } catch (_) {}
+      });
+      document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => document.getElementById(button.dataset.close).classList.remove('open')));
+
+      document.addEventListener('keydown', event => {
+        if (event.target.matches('input, textarea, select')) return;
+        if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); showSlide(activeIndex + 1); }
+        else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) { event.preventDefault(); showSlide(activeIndex - 1); }
+        else if (event.key === 'Home') showSlide(0);
+        else if (event.key === 'End') showSlide(slides.length - 1);
+        else if (event.key === 'Escape') { directoryModal.classList.remove('open'); notesPanel.classList.remove('open'); }
+      });
+
+      document.addEventListener('touchstart', event => {
+        touchStartX = event.changedTouches[0].clientX;
+        touchStartY = event.changedTouches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', event => {
+        const dx = event.changedTouches[0].clientX - touchStartX;
+        const dy = event.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.4) showSlide(activeIndex + (dx < 0 ? 1 : -1));
+      }, { passive: true });
+
+      try { localStorage.setItem('interactiveDemoStarterOpened', 'true'); } catch (_) {}
+      renderDemo();
+      const hashIndex = slides.findIndex(slide => slide.id === location.hash.slice(1));
+      if (hashIndex > 0) showSlide(hashIndex, false);
+      else updateUI();
+    })();
+  </script>
+</body>
+</html>

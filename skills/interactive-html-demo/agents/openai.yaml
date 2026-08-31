@@ -1,0 +1,5 @@
+interface:
+  display_name: "Interactive HTML Demo"
+  short_description: "Build reusable single-file interactive demos"
+  brand_color: "#E45B47"
+  default_prompt: "Use $interactive-html-demo to turn this content into a polished single-file interactive HTML demo."

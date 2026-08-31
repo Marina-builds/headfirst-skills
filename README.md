@@ -16,7 +16,7 @@ Every public Skill must include:
 
 | Skill | Provenance | State |
 |---|---|---|
-| `interactive-html-demo` | Built from repeated HEADFIRST workflows | Public preparation |
+| `interactive-html-demo` | HEADFIRST Original | Release-ready locally |
 | `web-design-qa` | Local rebuild informed by public references | Provenance review required |
 | `diagnosing-bugs` | Adapted from `mattpocock/skills`, MIT | Upstream attribution required |
 
@@ -26,6 +26,10 @@ The private working Skill library is not mirrored here. Customer workflows, inte
 
 The public catalog is being developed at `https://system-field-notes.vercel.app/skills/`.
 
+## First Skill
+
+`skills/interactive-html-demo/` contains the complete first package: instructions, Codex UI metadata, a reusable single-file starter, a dependency-free validator, rendered acceptance criteria, provenance, limitations, and validation evidence.
+
 ## License
 
-No project-wide license has been selected yet. Each released Skill will declare its own license and provenance before publication.
+Original HEADFIRST work in this repository is released under the MIT License. Adapted work will retain its applicable upstream license and notices.
