@@ -17,16 +17,21 @@
     {
       "name": "web-design-qa",
       "provenance": "reference-based-rebuild",
-      "state": "review-required",
-      "releaseBlocker": "Complete clean-room comparison and attribution"
+      "reference": "https://github.com/Nutlope/hallmark",
+      "referenceLicense": "MIT",
+      "sourceAuditDate": "2026-09-01",
+      "state": "source-audit-passed-not-packaged",
+      "releaseBlocker": "Create a public-safe package with provenance, release evidence and rendered QA results"
     },
     {
       "name": "diagnosing-bugs",
       "provenance": "open-source-adaptation",
       "upstream": "https://github.com/mattpocock/skills",
+      "upstreamCommit": "2ab958093e83e0ec752e6c1c5932da465bf23e0c",
       "license": "MIT",
-      "state": "review-required",
-      "releaseBlocker": "Preserve copyright, license and upstream link"
+      "sourceAuditDate": "2026-09-01",
+      "state": "source-audit-passed-not-packaged",
+      "releaseBlocker": "Include Matt Pocock's copyright and MIT notice, provenance, change summary and validation evidence in the public package"
     }
   ]
 }
