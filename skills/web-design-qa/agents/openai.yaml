@@ -1,0 +1,5 @@
+interface:
+  display_name: "Web Design QA"
+  short_description: "Audit rendered web UI with evidence and safe edit boundaries"
+  brand_color: "#E45B47"
+  default_prompt: "Use $web-design-qa to audit this rendered page and prioritize the issues without editing files unless I ask."

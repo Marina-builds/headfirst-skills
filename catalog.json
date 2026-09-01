@@ -6,7 +6,7 @@
       "provenance": "headfirst-original",
       "version": "1.0.0",
       "license": "MIT",
-      "state": "release-ready-local",
+      "state": "public",
       "validation": {
         "staticPasses": 15,
         "staticWarnings": 0,
@@ -17,21 +17,35 @@
     {
       "name": "web-design-qa",
       "provenance": "reference-based-rebuild",
+      "version": "1.0.0",
+      "license": "MIT",
       "reference": "https://github.com/Nutlope/hallmark",
+      "referenceCommit": "2e1b9baaed5f1614c409ae7084c7d64f9e878344",
       "referenceLicense": "MIT",
       "sourceAuditDate": "2026-09-01",
-      "state": "source-audit-passed-not-packaged",
-      "releaseBlocker": "Create a public-safe package with provenance, release evidence and rendered QA results"
+      "state": "public",
+      "validation": {
+        "routingCases": 5,
+        "remoteReferenceSafety": true,
+        "privateDataFindings": 0
+      }
     },
     {
       "name": "diagnosing-bugs",
       "provenance": "open-source-adaptation",
+      "version": "1.0.0",
       "upstream": "https://github.com/mattpocock/skills",
       "upstreamCommit": "2ab958093e83e0ec752e6c1c5932da465bf23e0c",
       "license": "MIT",
       "sourceAuditDate": "2026-09-01",
-      "state": "source-audit-passed-not-packaged",
-      "releaseBlocker": "Include Matt Pocock's copyright and MIT notice, provenance, change summary and validation evidence in the public package"
+      "state": "public",
+      "validation": {
+        "routingCases": 5,
+        "diagnosisOnlyReadOnly": true,
+        "sensitiveEvidenceBoundary": true,
+        "upstreamNoticeIncluded": true,
+        "privateDataFindings": 0
+      }
     }
   ]
 }

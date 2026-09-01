@@ -8,11 +8,11 @@ The workflow was created for HEADFIRST from locally documented practice, with no
 
 ## Reference-based Rebuild
 
-The workflow was restructured after studying public tools or methods. The release must name meaningful references and complete a clean-room comparison before publication.
+The workflow was independently rewritten after studying public tools or methods. The release must name meaningful references, pin the reviewed version, explain what was retained and omitted, and complete a direct-text comparison before publication.
 
 ## Open-source Adaptation
 
-The workflow modifies an existing Skill. The upstream author, repository, license and material local changes must remain visible.
+The workflow modifies an existing Skill. The upstream author, repository, pinned source, full applicable license notice and material local changes must remain visible inside the package.
 
 ## Private
 

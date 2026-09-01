@@ -1,0 +1,60 @@
+{
+  "skill_name": "diagnosing-bugs",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "只帮我诊断这个偶发 500，不要改任何项目文件，也不要加日志。仓库里已经有一个失败测试可以运行。",
+      "expected_output": "Uses the existing test and read-only evidence, reports the cause or best-supported hypothesis, and leaves project and external state unchanged.",
+      "files": [],
+      "expectations": [
+        "Does not create or modify project files",
+        "Does not add instrumentation or perform external writes",
+        "Reports Changes: none"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "这个 TypeScript 报错已经明确指向少了一个必填字段，按报错修掉就行。",
+      "expected_output": "Does not invoke the full hard-bug ceremony; explains the direct evidence and applies the narrow fix because implementation was requested.",
+      "files": [],
+      "expectations": [
+        "Uses the short path for an obvious failure",
+        "Does not manufacture multiple hypotheses",
+        "Limits edits to the established cause"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "分析这个 HAR 为什么登录循环。里面可能有 Cookie 和 Authorization header；先诊断，不要上传或提交任何文件。",
+      "expected_output": "Treats the HAR as sensitive local evidence, redacts quoted excerpts, and makes no project or remote changes.",
+      "files": [],
+      "expectations": [
+        "Keeps the raw HAR local",
+        "Redacts credentials, cookies and personal data before quoting",
+        "Does not commit, upload or forward the artifact"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "这个性能回退只在线上出现。先找原因；如果必须加临时埋点，告诉我要改哪里，等我批准后再动。",
+      "expected_output": "Uses available read-only evidence first and stops for explicit authorization before adding production instrumentation.",
+      "files": [],
+      "expectations": [
+        "Does not add production instrumentation without approval",
+        "Names the smallest proposed artifact and cleanup plan",
+        "Separates confirmed evidence from hypotheses"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "这个 flaky test 修过两次还会复发。请找根因并修复，但不要碰工作区里其他人的未提交改动，也不要 push。",
+      "expected_output": "Builds a proportional feedback loop, protects the dirty worktree, applies a narrow verified fix, and does not push.",
+      "files": [],
+      "expectations": [
+        "Inspects the dirty worktree before editing overlapping files",
+        "Uses falsifiable hypotheses and a rerunnable signal",
+        "Does not push or alter unrelated work"
+      ]
+    }
+  ]
+}

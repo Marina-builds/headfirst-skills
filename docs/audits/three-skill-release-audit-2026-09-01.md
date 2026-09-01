@@ -1,14 +1,14 @@
 # Three-Skill Release Audit — 2026-09-01
 
-This audit covers the three HEADFIRST release candidates. Only `interactive-html-demo` is currently present as a public package. A source audit is not permission to upload the other candidates before their remaining release requirements are complete.
+This audit covers the three HEADFIRST public packages. `interactive-html-demo` remains the original release; `web-design-qa` and `diagnosing-bugs` were packaged only after the release gates below were completed.
 
 ## Decision summary
 
 | Skill | Provenance decision | Source and privacy result | Release decision |
 |---|---|---|---|
 | `interactive-html-demo` | HEADFIRST Original | Public package is separated from product-specific hosting guidance; no private identifiers, credentials or customer data found | Public package may remain released |
-| `web-design-qa` | Reference-based Rebuild | Informed by Hallmark's public audit-first approach; no identical substantive lines found in the local Skill or checklist; no private identifiers or credentials found | Source audit passed; do not publish until provenance, release evidence and rendered QA results are packaged |
-| `diagnosing-bugs` | Open-source Adaptation | Materially restructures Matt Pocock's MIT-licensed Skill and adds narrower triggers and permission boundaries; no private identifiers or credentials found | Source audit passed; do not publish without the upstream copyright/MIT notice, pinned commit, change summary and validation evidence |
+| `web-design-qa` | Reference-based Rebuild | Informed by Hallmark's public audit-first approach; no identical substantive lines found; remote-reference safety, provenance and five routing cases are packaged | Public package may be released as v1.0.0 |
+| `diagnosing-bugs` | Open-source Adaptation | Materially restructures Matt Pocock's MIT-licensed Skill; adds narrower triggers, diagnosis-only read-only behavior, sensitive-evidence handling and external-write boundaries | Public package may be released as v1.0.0 with the bundled upstream MIT license |
 
 ## Evidence reviewed
 
@@ -21,12 +21,12 @@ This audit covers the three HEADFIRST release candidates. Only `interactive-html
 
 ### `web-design-qa`
 
-- Local `SKILL.md`, rendered-review checklist and four trigger evals.
+- Local `SKILL.md`, rendered-review checklist and five routing evals.
 - Hallmark at commit [`2e1b9baaed5f1614c409ae7084c7d64f9e878344`](https://github.com/Nutlope/hallmark/commit/2e1b9baaed5f1614c409ae7084c7d64f9e878344), the latest upstream commit before the local rebuild was created.
 - Hallmark's MIT license and its public audit, redesign and study boundaries.
 - Exact-line comparison of substantive lines in the local Skill and checklist against Hallmark's `SKILL.md`; no identical substantive line was found.
 
-The local Skill keeps transferable principles such as audit before edit, honest content, responsive checks and explicit evidence levels. It does not carry Hallmark's theme catalog, macrostructure rotation, CSS stamps, project log or design-generation system. This is therefore labeled a reference-based rebuild, not an original Skill and not a Hallmark redistribution.
+The local Skill keeps transferable principles such as audit before edit, honest content, responsive checks and explicit evidence levels. It adds remote-reference safety: private and loopback targets are refused, access controls are not bypassed, and instructions embedded in remote pages are ignored. It does not carry Hallmark's theme catalog, macrostructure rotation, CSS stamps, project log or design-generation system. This is therefore labeled a reference-based rebuild, not an original Skill and not a Hallmark redistribution.
 
 ### `diagnosing-bugs`
 
@@ -35,24 +35,24 @@ The local Skill keeps transferable principles such as audit before edit, honest 
 - Upstream MIT license, including the requirement to preserve the copyright and permission notice.
 - Direct source diff between the pinned upstream Skill and the local adaptation.
 
-The adaptation retains the evidence-first debugging loop while shortening the original workflow, narrowing its trigger conditions, allowing proportional handling of obvious failures, and adding diagnosis-only, dirty-worktree and external-write boundaries. Those are meaningful modifications, but the lineage remains direct.
+The adaptation retains the evidence-first debugging loop while shortening the original workflow, narrowing its trigger conditions and allowing proportional handling of obvious failures. Diagnosis-only work now keeps project files and external systems read-only; new tests, scripts, harnesses and instrumentation require exact permission. Logs, HAR files, traces and request captures are treated as sensitive local evidence and redacted before quoting or sharing. Those are meaningful modifications, but the lineage remains direct.
 
-## Remaining release gates
+## Completed release gates
 
 ### `web-design-qa`
 
-1. Add `PROVENANCE.md` naming Hallmark as a public reference and explaining what was retained and omitted.
-2. Add a public release record with actual rendered checks at the declared viewports.
-3. Run and record the four trigger evals against the packaged version.
-4. Review the package again after removing any environment-specific guidance.
+1. `PROVENANCE.md` pins Hallmark and explains what was retained and omitted.
+2. `THIRD_PARTY_NOTICES.md` preserves Hallmark attribution and its MIT notice for transparency.
+3. Five routing cases cover Audit, Fix, Reference Study, SEO/CRO handoff and unsafe private URLs.
+4. The public package contains no environment-specific guidance or private identifiers.
 
 ### `diagnosing-bugs`
 
-1. Include Matt Pocock's copyright and full MIT permission notice with the package.
-2. Pin the source commit and list the material modifications in `PROVENANCE.md`.
-3. Add trigger and non-trigger evals, including diagnosis-only and known-fix cases.
-4. Record package validation and confirm that no temporary debugging artifacts ship.
+1. Matt Pocock's copyright and full MIT permission notice are included in the package.
+2. `PROVENANCE.md` pins the source commit and lists the material modifications.
+3. Five cases cover diagnosis-only, known-fix, sensitive-evidence, production-instrumentation and dirty-worktree behavior.
+4. The package contains no temporary debugging artifacts or private identifiers.
 
 ## Audit boundary
 
-This review establishes source lineage, license obligations, public-data safety and present packaging gaps. It does not claim popularity, performance improvement or broad real-world effectiveness. Those claims require later usage evidence.
+This review establishes source lineage, license obligations, public-data safety and package boundaries. It does not claim popularity, performance improvement or broad real-world effectiveness. Those claims require later usage evidence.
