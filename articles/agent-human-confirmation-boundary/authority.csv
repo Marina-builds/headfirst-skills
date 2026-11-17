@@ -1,0 +1,6 @@
+action,example authorization,expected
+read source,granted,read
+record observation,granted,store evidence
+change accepted baseline,pending,prepare review
+notify customer,pending,hold delivery
+source times out,read attempt allowed,mark incomplete

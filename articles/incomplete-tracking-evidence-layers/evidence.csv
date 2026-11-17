@@ -1,0 +1,4 @@
+source,scope,value,status,next_check
+platform,daily clicks,9,observed,confirm period
+extractor,ad units,,excluded,reconcile extraction with daily scope
+analytics,downstream events,,access unavailable,request appropriate access

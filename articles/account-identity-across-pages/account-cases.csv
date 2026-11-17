@@ -1,0 +1,4 @@
+account,display_name,brands,search,expected
+A,Promotion,Green,Green,A only
+B,Promotion,Sail,Sail,B only
+C,Promotion,field omitted,,renders without disclosing restricted identity

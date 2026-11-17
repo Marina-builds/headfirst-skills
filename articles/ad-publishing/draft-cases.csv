@@ -1,0 +1,4 @@
+scenario,change,expected server result,what to inspect
+stale tab,save from second tab,reject stale deletion,new edit survives
+publishing,draft enters publishing,reject delete,visible status
+wrong account,switch account,reject cross-account operation,record remains

@@ -1,0 +1,4 @@
+stage,source_price,reviewed_price,stored_price,pending_before,expected
+first,12,12,10,0,create one
+retry,12,12,10,1,reuse existing
+after update,12,12,12,0,no new item

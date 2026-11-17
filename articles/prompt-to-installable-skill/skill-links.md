@@ -1,0 +1,1 @@
+[HTML starter](../../skills/interactive-html-demo/assets/single-file-starter.html) · [Validator](../../skills/interactive-html-demo/scripts/validate_interactive_html.mjs) · [Acceptance checklist](../../skills/interactive-html-demo/references/acceptance-checklist.md)

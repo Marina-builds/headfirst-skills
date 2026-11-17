@@ -1,0 +1,3 @@
+scenario,visible action,destination check,open question
+client handover,share project handoff,can recipient open it,verify sharing claim
+internal approval,request sign-off,can reviewer find request,verify tracking event
