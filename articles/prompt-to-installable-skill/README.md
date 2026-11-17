@@ -1,12 +1,12 @@
-# 从 starter 做一次失败重试
+# 亲手跑完 starter 的四个状态
 
-打开公开 Skill 里的单文件 starter，拿一个表单任务走到失败状态。记下刚才填的值，再点重试。输入有没有留下、手机能不能完成操作，需要你在浏览器里实际走一次。包里的 Node 校验器能先查文档结构、视口等静态条件。
+下载公开 Skill 里的单文件 starter，在第三屏依次点 Run action、Get feedback、Retry。卡片会从 READY 走到 SUCCESS。再点 Restart demo，检查它是否回到开头。包里的 Node 校验器能检查文件结构和视口设置；按钮点下去之后发生了什么，要在浏览器里走一遍才知道。
 
 公开 Skill 文件。[打开配套材料](skill-links.md)
 
-## Try a failed submission in the starter
+## Run the four states in the starter
 
-Open the single-file starter and exercise a failed form submission. Note the values before retrying and try the same path at phone width. The Node validator checks static properties such as document structure and viewport configuration. Recovery still needs a browser walkthrough.
+Download the single-file starter. On the third slide, click Run action, Get feedback and Retry. The card moves from READY to SUCCESS. Click Restart demo and check that it returns to the start. The Node validator checks the file structure and viewport declaration; use the browser to verify what each click does.
 
 [Open the companion file](skill-links.md)
 

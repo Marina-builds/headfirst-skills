@@ -13,6 +13,6 @@
 - [故意把结果写反](prompt-is-not-a-workflow/)
 - [交换两行，看看哪一步发现错误](report-consistency/)
 - [用两个标签页验收删除草稿](ad-publishing/)
-- [从 starter 做一次失败重试](prompt-to-installable-skill/)
+- [亲手跑完 starter 的四个状态](prompt-to-installable-skill/)
 - [拿一个按钮做一次移动端复验](page-opens-not-ready-to-ship/)
 - [用一条失败测试判断 Agent 有没有越界](reproduce-before-fixing-bugs/)
