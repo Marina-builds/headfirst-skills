@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAQ 审核 · 版本核对示例</title>
+<style>
+*{box-sizing:border-box}body{background:#f5f2eb;color:#243932;font:17px/1.65 system-ui,sans-serif;max-width:740px;margin:8vh auto;padding:0 22px}main{background:white;padding:clamp(20px,5vw,44px);border:1px solid #cdd7cb;border-radius:14px}h1{line-height:1.25}textarea{display:block;width:100%;margin:8px 0 20px;padding:12px;font:inherit}button{background:#244c41;color:white;border:0;border-radius:5px;padding:10px 16px;font:inherit;cursor:pointer;margin:0 6px 8px 0}output{display:block;margin:14px 0;font-weight:600}
+</style>
+<main><h1>这次通过的是哪一版？</h1>
+<p>先保存你的审核决定，再改一个词，看看能否提交刚才的决定。</p>
+<label for="answer">当前提案</label><textarea id="answer" rows="3">可以在表格右上角选择「导出 CSV」。</textarea>
+<button id="save">保存「通过」草稿</button><button id="submit">提交审核</button>
+<output id="result" aria-live="polite">尚未保存审核决定。</output></main>
+<script>
+const answer = document.querySelector('#answer');
+const result = document.querySelector('#result');
+let reviewedAnswer = null;
+document.querySelector('#save').onclick = () => {
+  if (!answer.value.trim()) {
+    result.textContent = '请先填写提案。';
+    return;
+  }
+  reviewedAnswer = answer.value;
+  result.textContent = '已保存当前版本的审核决定。';
+};
+document.querySelector('#submit').onclick = () => {
+  if (reviewedAnswer === null) {
+    result.textContent = '请先保存审核决定。';
+  } else if (reviewedAnswer !== answer.value) {
+    result.textContent = '提案已更新，请重新审核。';
+  } else {
+    result.textContent = '版本一致，模拟提交成功。';
+  }
+};
+</script></html>

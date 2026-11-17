@@ -22,6 +22,10 @@ Every public Skill must include:
 
 The private working Skill library is not mirrored here. Customer workflows, internal identifiers, private operating rules, personal memory and source profiles remain outside this repository.
 
+## Article projects
+
+[FAQ review workbench](articles/faq-review-workbench/) · A walkthrough in Chinese, a screenshot of the review interface with sample data, and two runnable examples of version-bound review.
+
 ## Website
 
 The public catalog is being developed at `https://system-field-notes.vercel.app/skills/`.
