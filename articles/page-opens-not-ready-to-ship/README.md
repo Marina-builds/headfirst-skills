@@ -11,3 +11,7 @@ Choose one primary action, narrow the viewport and compare the button promise wi
 [Open the companion file](skill-links.md)
 
 [QA checklist](../../skills/web-design-qa/references/checklist.md) · [Skill provenance](../../skills/web-design-qa/PROVENANCE.md) · [Evaluation cases](../../skills/web-design-qa/evals/evals.json)
+
+![在 390 像素视口运行 FAQ 版本比较演示，提交后显示提案已更新](mobile-review.png)
+
+这张截图取自[站内 FAQ 交互演示](https://marinacurrent.studio/examples/faq-review-workbench/demo.html)。先保存草稿，在提案里加上「管理员」，再点提交。验收时要能在手机屏幕上读到「提案已更新，请重新审核」。
